@@ -1,0 +1,75 @@
+/* This is my team's code looks like */
+
+package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * This file contains an example of an iterative (Non-Linear) "OpMode".
+ * An OpMode is a 'program' that runs in either the autonomous or the teleop period of an FTC match.
+ */
+
+ // Code starts here//
+@TeleOp
+
+public class ArcadeDrive extends OpMode {
+    /* Declare OpMode members. */
+    DcMotor fL = hardwareMap.get(DcMotor.class, "frontLeftMotor");
+    DcMotor fR = hardwareMap.get(DcMotor.class, "frontRightMotor");
+    DcMotor bL = hardwareMap.get(DcMotor.class, "backLeftMotor");
+    DcMotor bR = hardwareMap.get(DcMotor.class, "backRightMotor");
+    @Override
+    public void init() {
+        telemetry.addData("Status", "Initialized");
+        fR.setDirection(DcMotorSimple.Direction.REVERSE);
+        bR.setDirection(DcMotorSimple.Direction.REVERSE);
+        
+        ;
+        
+    }
+
+    /*
+     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
+     */
+    @Override
+    public void init_loop() {
+    }
+
+    /*
+     * Code to run ONCE when the driver hits PLAY
+     */
+    @Override
+    public void start() {
+
+    }
+
+    /*
+     * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
+     */
+    @Override
+    public void loop() {
+        double yjoystick = -this.gamepad1.left_stick_y;
+        double xjoystick = this.gamepad1.left_stick_x;
+        double turnRight = yjoystick - xjoystick;
+        double turnLeft = yjoystick + xjoystick;
+        fR.setPower(turnRight);
+        bR.setPower(turnRight);
+        fL.setPower(turnLeft);
+        bL.setPower(turnLeft);
+    }
+
+    /*
+     * Code to run ONCE after the driver hits STOP
+     */
+    @Override
+    public void stop() {
+
+    }
+}
